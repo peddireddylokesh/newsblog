@@ -2,6 +2,8 @@
 
 include 'config.php';
 include 'header.php';
+
+
 ?>
 <html xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
@@ -47,7 +49,7 @@ include 'header.php';
         }
         table.table th i {
             font-size: 13px;
-            margin: 0 5px;
+            margin: 5px;
             cursor: pointer;
         }
         table.table th:last-child {
@@ -155,7 +157,7 @@ $(".add-new").removeAttr("disabled");
     <title>sub-admin</title>
 </head>
 <body>
-    <div class=" fadeInDown justify-content-start" style="padding:0 20px 0 270px">
+    <div class=" fadeInDown justify-content-start" style="padding:0px 300px 0px 300px">
 
         <div class="col-sm-4">
         </div><br><br>

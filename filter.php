@@ -26,7 +26,7 @@ include "header.php";
             <?php
             $id = 0;
             $sub = 0;
-            if (isset($_GET['id']) && isset($_GET['sub'])) {
+            if (isset($_GET['id']) && !empty($_GET['sub'])) {
                 $id = $_GET['id'];
                 $sub = $_GET['sub'];
             }
@@ -44,6 +44,8 @@ include "header.php";
                             <div class="card-body">
                                 <h3><?= $row['title'] ?></h3>
                                 <p><?= $row['description'] ?></p>
+                                <div style="height: 50px; overflow:hidden; overflow: scroll; ">
+
                                 <?php
                                 $result1 = mysqli_query($conn, $sql1);
                                 if (mysqli_num_rows($result1) > 0) {
@@ -53,7 +55,7 @@ include "header.php";
                                         <?php
                                     }
                                 }
-                                ?>
+                                ?></div>
                                 <form class="navbar-form navbar-right" action="" method="post" name="Comment"
                                       id="CmmHere">
                                     <div class="form-group">

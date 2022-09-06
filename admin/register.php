@@ -1,41 +1,45 @@
 <?php
 include 'config.php';
-$msg = "";
-$user_msg = null;
-$email_msg = null;
-$psw_msg = null;
-$edit_row = '';
+
+
+$msg = $user_msg = $email_msg = $psw_msg = $edit_row = "";
 $edit = false;
 $sql_true = false;
 
-$edit_user_name = '';
-$edit_email = '';
+$edit_user_name =$edit_email = "";
 
+function input_validation($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
-if (isset($_GET['id']) && $_GET['id'] != '') {
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $edit = true;
     $id = $_GET['id'];
 }
 
 if (!$edit) {
-    if (isset($_POST['submit'])) {
-        if (isset($_POST['name']) && $_POST['name'] != '') {
-            $sql_true = true;
-            $user_name = $_POST['name'];
-        } else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['name'])) {
             $user_msg = "Please enter User Name";
-        }
-        if (isset($_POST['email']) && $_POST['email'] != '') {
-            $sql_true = true;
-            $email = $_POST['email'];
         } else {
+            $sql_true = true;
+            $user_name = input_validation($_POST['name']);
+        }
+        if (empty($_POST['email'])) {
             $email_msg = "Please enter Email";
-        }
-        if (isset($_POST['psw']) && $_POST['psw'] != '') {
-            $sql_true = true;
-            $password = md5($_POST['psw']);
         } else {
+            $sql_true = true;
+            $email = input_validation($_POST['email']);
+        }
+        if (empty($_POST['psw'])) {
             $psw_msg = "Please enter Password";
+        } else {
+            $sql_true = true;
+            $password = md5(input_validation($_POST['psw']));
         }
         if ($sql_true && $user_msg == null && $email_msg == null && $psw_msg == null) {
             $sql = "INSERT INTO `user` (`user_name`, `email`, `password`, `account_type`, `created_at`) VALUES ('$user_name', '$email', '$password', 'SUB_ADMIN', now())";
@@ -51,10 +55,10 @@ if (!$edit) {
     }
 } else {
 
-    if (isset($_POST['update'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $update_user_name = $_POST['name'];
         $update_email = $_POST['email'];
-        if (isset($_POST['psw']) && $_POST['psw'] != '') {
+        if (!empty($_POST['psw'])) {
             $sql_true = true;
             $update_password = md5($_POST['psw']);
         } else {
@@ -74,6 +78,7 @@ if (!$edit) {
 
 ?>
 <?php
+include 'form_validation.php';
 include 'header.php';
 
 
@@ -104,7 +109,7 @@ if ($edit) {
                 <br>
 
                 <label for="email"><b>Email</b></label>
-                <input type="text" id="email" placeholder="Enter Email" name="email"
+                <input type="email" id="email" placeholder="Enter Email" name="email"
                        value="<?php echo $edit_email ? $edit_email : '' ?>">
                 <span class="text-danger"><?php echo $email_msg; ?></span>
                 <br>

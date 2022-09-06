@@ -397,7 +397,7 @@ $user_name = $_SESSION['user_name'];
         }
 
         /* Full-width input fields */
-        input[type=text], input[type=password] {
+        input[type=text], input[type=password],input[type=email] {
             width: 100%;
             padding: 15px;
             margin: 5px 0 22px 0;
@@ -406,7 +406,7 @@ $user_name = $_SESSION['user_name'];
             background: #f1f1f1;
         }
 
-        input[type=text]:focus, input[type=password]:focus {
+        input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
             background-color: #ddd;
             outline: none;
         }
@@ -480,5 +480,3 @@ $user_name = $_SESSION['user_name'];
 <div id="main">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; welcome  <?php echo $user_name ?></span>
 </div>
-</body>
-</html>

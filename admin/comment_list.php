@@ -204,10 +204,10 @@ include 'header.php';
                     <td>
                         <a href="edit_comment.php?id=<?php echo $row['id']; ?>&status=APPROVED" class="add-new" title=""
                            data-toggle="tooltip" data-original-title="Approved" style="display:inline;"><i
-                                    class="material-icons"></i></a>
+                                    class="fa fa-check"></i></a>
                         <a href="edit_comment.php?id=<?php echo $row['id']; ?>&status=REJECTED" class="edit" title=""
                            data-toggle="tooltip" data-original-title="Rejected" style="display: inline;"><i
-                                    class="fa fa-check"></i></a>
+                                    class="material-icons"></i></a>
                         <a href="edit_comment.php?id=<?php echo $row['id']; ?>&type=1" class="delete" title=""
                            data-toggle="tooltip" data-original-title="Delete"><i class="material-icons"></i></a>
                     </td>

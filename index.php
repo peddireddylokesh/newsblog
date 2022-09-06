@@ -1,8 +1,12 @@
 <?php
 include 'header.php';
 ?>
+<html lang="en">
+
+<body>
 <nav class="navbar">
     <div class="container">
+
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><strong style="font-size: xx-large">Latest Articles</strong></a>
         </div>
@@ -19,6 +23,7 @@ include 'header.php';
 </nav>
 <br><br>
 
+
 <div class="container">
     <span><?= $cmt_msg ?></span>
     <div class="row ">
@@ -32,43 +37,41 @@ include 'header.php';
                 ?>
                 <div class="col-lg-4 md-2 sm-1 wow animate__fadeInDown" data-wow-duration="1s">
                     <div class="card mb-5">
-                        <img src="./upload/<?= $row['img_path'] ?>" class="img-rounded" alt="blog-img"
-                             style="box-shadow:10px 10px 10px #5bc0de" width="340px" height="220px">
+
+                        <img src="./upload/<?= $row['img_path'] ?>" class="img-responsive" alt="blog-img"
+                             style="box-shadow:10px 10px 10px #5bc0de" width="500px" height="220px">
                         <div class="card-body">
                             <h3><?= $row['title'] ?></h3>
                             <p><?= $row['description'] ?></p>
-                            <?php
-                            $result1 = mysqli_query($conn, $sql1);
-                            if (mysqli_num_rows($result1) > 0) {
-                                while ($row1 = mysqli_fetch_array($result1)) {
-                                    ?>
-                                    <span><?= $row1['comment'] ?></span><br>
-                                    <?php
+                            <div style="height: 50px; overflow:hidden; overflow: scroll; ">
+                                <?php
+                                $result1 = mysqli_query($conn, $sql1);
+                                if (mysqli_num_rows($result1) > 0) {
+                                    while ($row1 = mysqli_fetch_array($result1)) {
+                                        ?>
+                                        <span><?= $row1['comment'] ?></span><br>
+                                        <?php
+                                    }
                                 }
-                            }
-                            ?>
-
+                                ?>
+                            </div>
                             <form class="navbar-form navbar-right" action="" method="post" name="Comment"
-                                      id="CmmHere">
-                                    <div class="form-group">
-                                        <label>
-                                            <input type="hidden" name="article_id" value="<?= $row['id'] ?>">
-                                            <input type="text" name="comment_msg" class="form-control"
-                                                   placeholder="Comment">
-                                            <button type="submit" name="comment" class="btn btn-default">Comment here
-                                            </button>
-                                        </label>
-                                    </div>
-                                </form>
-
-
-
-
-
+                                  id="CmmHere">
+                                <div class="form-group">
+                                    <label>
+                                        <input type="hidden" name="article_id" value="<?= $row['id'] ?>">
+                                        <input type="text" name="comment_msg" class="form-control"
+                                               placeholder="Comment">
+                                        <button type="submit" name="comment" class="btn btn-default">Comment here
+                                        </button>
+                                    </label>
+                                </div>
+                            </form>
 
 
                         </div>
-                    </div><br><br><br><br><br><br><br><br><br><br><br>
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <?php
             }
@@ -80,7 +83,7 @@ include 'header.php';
 <!--containerclose-->
 
 
-<footer class="text-center text-white" style="background-color:black;"><br><br>
+<footer class="text-center text-white" style="background-color:black;position:-ms-device-fixed"><br><br>
     <!-- Grid container -->
     <div class="container p-4 pb-0">
         <!-- Section: Social media -->

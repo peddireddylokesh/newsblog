@@ -1,8 +1,6 @@
 <?php
 include 'config.php';
-$sub_msg = "";
-$cmt_msg = "";
-$user_email = "";
+$sub_msg = $cmt_msg = $user_email = "";
 if (isset($_POST['Subscribe'])) {
     $user_email = $_POST['email'];
     $validate_email = filter_var($user_email, FILTER_VALIDATE_EMAIL);
@@ -49,12 +47,36 @@ if (isset($_POST['comment'])) {
     <link rel="stylesheet" href="assets/css/animate.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #dbdbdb;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #69acb3;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
 
 </head>
 <body>
 
 <nav class="navbar-inverse navbar-fixed-top" style="font-weight: bold">
     <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="margin-top: -30px"><img src="assets/img/logo.png" alt="Logo"></a>
+        </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="index.php">Home</a></li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Political<span
@@ -91,15 +113,64 @@ if (isset($_POST['comment'])) {
                     </ul>
                 </ul>
             </li>
-            <li><a href="#">About us<span
-                    ></span></a>
 
+            <li  data-toggle="modal" data-target="#myModal" style="color:#4677b3"><a href="#">About us</a>
+            </li>
         </ul>
     </div>
 </nav>
+
+
+<div class="container">
+    <br><br>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">10.00Am-5.00PM</button>
+
+
+                    <h4 class="modal-title">About Us</h4>
+
+                    <h5>Mail Us We Will Respond Soon... </h5>
+
+
+                </div>
+                <div class="modal-body">
+
+                    <a href="#">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <span>
+                  lokeshpeddireddy999@gmail.com                    <br>
+                    <br>
+
+                </span>
+                    </a>
+                    <p>
+                        <strong>Our Address </strong><br>
+                        MVP Main Road, Backside Of Medicover<br>
+                        Pin-530017 Vizag.</p>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 <br><br><br>
 <br>
-<!--<div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-12"><h1 style="color: red">LIVE 24X7</h1>
 
@@ -118,10 +189,10 @@ if (isset($_POST['comment'])) {
                 <div class="owl-carousel owl-theme">
 
                     <div class="item">
-                        <iframe width="240" height="300" src="https://www.youtube.com/embed/Cy_6-_XUW-c"></iframe>
+                        <iframe width="240" height="300" src="https://www.youtube.com/embed/lZiJEk-9hds"></iframe>
                     </div>
                     <div class="item">
-                        <iframe width="240" height="300" src="https://www.youtube.com/embed/Md7nzrFhqWQ"></iframe>
+                        <iframe width="240" height="300" src="https://www.youtube.com/embed/II_m28Bm-iM"></iframe>
                     </div>
                     <div class="item">
                         <iframe width="240" height="300" src="https://www.youtube.com/embed/fP9JZ9xDnhc"></iframe>
@@ -131,4 +202,4 @@ if (isset($_POST['comment'])) {
             </div>
         </div>
     </div>
-</div>-->
+</div>

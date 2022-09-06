@@ -1,28 +1,23 @@
 <?php
 session_start();
+
+
 include 'config.php';
 include 'header.php';
 
-$msg = "";
-$user_msg = null;
-$email_msg = null;
-$psw_msg = null;
-$edit_row = '';
+$msg = $user_msg =$email_msg =$psw_msg = $edit_row = $edit_title =$edit_desc =$edit_type = $edit_path = "";
 $edit = false;
 $sql_true = false;
-$edit_title = null;
-$edit_desc = null;
-$edit_type = null;
-$edit_path = null;
 
 
-if (isset($_GET['id']) && $_GET['id'] != '') {
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $edit = true;
     $id = $_GET['id'];
 }
 
 if ($edit) {
-    if (isset($_POST['update'])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
         $title = $_POST['title'];
         $description = $_POST['description'];
         $type = $_POST['type'];
@@ -40,7 +35,7 @@ if ($edit) {
         } else {
             $file = $_POST['path'];
         }
-        $update_sql = "UPDATE `article` SET `title`='$title',`description`='$description',`img_path`='$file',`type`='$type',`sub_type`='$sub_type' WHERE `id` = $id";
+        $update_sql = "UPDATE `article` SET `title`='$title',`description`='$description',`img_path`='$file',`type`='$type',`sub_type`='$sub_type' WHERE `id` = '$id'";
         $res = mysqli_query($conn, $update_sql) or die(mysqli_error());
         if ($res) {
             header('location: article.php');
@@ -51,24 +46,24 @@ if ($edit) {
 
 
 } else {
-    if (isset($_POST['create_article'])) {
-        if (isset($_POST['title']) && $_POST['title'] != '') {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST['title']) ) {
+            $user_msg = "Please enter title";
+        } else {
             $sql_true = true;
             $title = $_POST['title'];
-        } else {
-            $user_msg = "Please enter title";
         }
-        if (isset($_POST['description']) && $_POST['description'] != '') {
+        if (empty($_POST['description']) ) {
+            $email_msg = "Please enter description";
+        } else {
             $sql_true = true;
             $description = $_POST['description'];
-        } else {
-            $email_msg = "Please enter description";
         }
-        if (isset($_POST['type']) && $_POST['type'] != '') {
+        if (isset($_POST['type']) && !empty($_POST['type'])) {
             $sql_true = true;
             $type = $_POST['type'];
         }
-        if (isset($_POST['sub_type']) && $_POST['sub_type'] != '') {
+        if (isset($_POST['sub_type']) && !empty($_POST['sub_type'])) {
             $sql_true = true;
             $sub_type = $_POST['sub_type'];
         }
@@ -82,7 +77,7 @@ if ($edit) {
 
         move_uploaded_file($file_loc, $folder . $file);
 
-        $sql = "INSERT INTO `article`(`title`, `description`, `img_path`, `type`,`sub_type`) VALUES ('$title', '$description', '$file', $type,$sub_type)";
+        $sql = "INSERT INTO `article`(`title`, `description`, `img_path`, `type`,`sub_type`) VALUES ('$title', '$description', '$file', '$type','$sub_type')";
         $result = mysqli_query($conn, $sql) or die(mysqli_error());
         if ($result) {
             header('location: article.php');
